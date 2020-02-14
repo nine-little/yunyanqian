@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.yanmai.dao.RolePermissionMapper" >
+  <resultMap id="BaseResultMap" type="org.yanmai.model.RolePermission" >
+    <id column="role_per_id" property="rolePerId" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="per_id" property="perId" jdbcType="INTEGER" />
+    <result column="notes" property="notes" jdbcType="VARCHAR" />
+    <result column="data_state" property="dataState" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    role_per_id, role_id, per_id, notes, data_state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.yanmai.model.example.RolePermissionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_role_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_role_permission
+    where role_per_id = #{rolePerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_role_permission
+    where role_per_id = #{rolePerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.yanmai.model.example.RolePermissionExample" >
+    delete from t_role_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.yanmai.model.RolePermission" >
+    insert into t_role_permission (role_per_id, role_id, per_id, 
+      notes, data_state)
+    values (#{rolePerId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{perId,jdbcType=INTEGER}, 
+      #{notes,jdbcType=VARCHAR}, #{dataState,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="org.yanmai.model.RolePermission" >
+    insert into t_role_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rolePerId != null" >
+        role_per_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="perId != null" >
+        per_id,
+      </if>
+      <if test="notes != null" >
+        notes,
+      </if>
+      <if test="dataState != null" >
+        data_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rolePerId != null" >
+        #{rolePerId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="perId != null" >
+        #{perId,jdbcType=INTEGER},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="dataState != null" >
+        #{dataState,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.yanmai.model.example.RolePermissionExample" resultType="java.lang.Integer" >
+    select count(*) from t_role_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_role_permission
+    <set >
+      <if test="record.rolePerId != null" >
+        role_per_id = #{record.rolePerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.perId != null" >
+        per_id = #{record.perId,jdbcType=INTEGER},
+      </if>
+      <if test="record.notes != null" >
+        notes = #{record.notes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataState != null" >
+        data_state = #{record.dataState,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_role_permission
+    set role_per_id = #{record.rolePerId,jdbcType=INTEGER},
+      role_id = #{record.roleId,jdbcType=INTEGER},
+      per_id = #{record.perId,jdbcType=INTEGER},
+      notes = #{record.notes,jdbcType=VARCHAR},
+      data_state = #{record.dataState,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.yanmai.model.RolePermission" >
+    update t_role_permission
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="perId != null" >
+        per_id = #{perId,jdbcType=INTEGER},
+      </if>
+      <if test="notes != null" >
+        notes = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="dataState != null" >
+        data_state = #{dataState,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where role_per_id = #{rolePerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.yanmai.model.RolePermission" >
+    update t_role_permission
+    set role_id = #{roleId,jdbcType=INTEGER},
+      per_id = #{perId,jdbcType=INTEGER},
+      notes = #{notes,jdbcType=VARCHAR},
+      data_state = #{dataState,jdbcType=DECIMAL}
+    where role_per_id = #{rolePerId,jdbcType=INTEGER}
+  </update>
+</mapper>

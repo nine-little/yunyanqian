@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.yanmai.dao.BussinessMapper" >
+  <resultMap id="BaseResultMap" type="org.yanmai.model.Bussiness" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bussinessid" property="bussinessid" jdbcType="VARCHAR" />
+    <result column="typeid" property="typeid" jdbcType="VARCHAR" />
+    <result column="companyid" property="companyid" jdbcType="VARCHAR" />
+    <result column="business_name" property="businessName" jdbcType="VARCHAR" />
+    <result column="asCompany" property="ascompany" jdbcType="VARCHAR" />
+    <result column="contracturl" property="contracturl" jdbcType="VARCHAR" />
+    <result column="publicfileurl" property="publicfileurl" jdbcType="VARCHAR" />
+    <result column="statu" property="statu" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, bussinessid, typeid, companyid, business_name, asCompany, contracturl, publicfileurl, 
+    statu, memo, createTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.yanmai.model.example.BussinessExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_business
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_business
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_business
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.yanmai.model.example.BussinessExample" >
+    delete from t_business
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.yanmai.model.Bussiness" >
+    insert into t_business (id, bussinessid, typeid, 
+      companyid, business_name, asCompany, 
+      contracturl, publicfileurl, statu, 
+      memo, createTime)
+    values (#{id,jdbcType=INTEGER}, #{bussinessid,jdbcType=VARCHAR}, #{typeid,jdbcType=VARCHAR}, 
+      #{companyid,jdbcType=VARCHAR}, #{businessName,jdbcType=VARCHAR}, #{ascompany,jdbcType=VARCHAR}, 
+      #{contracturl,jdbcType=VARCHAR}, #{publicfileurl,jdbcType=VARCHAR}, #{statu,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.yanmai.model.Bussiness" >
+    insert into t_business
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bussinessid != null" >
+        bussinessid,
+      </if>
+      <if test="typeid != null" >
+        typeid,
+      </if>
+      <if test="companyid != null" >
+        companyid,
+      </if>
+      <if test="businessName != null" >
+        business_name,
+      </if>
+      <if test="ascompany != null" >
+        asCompany,
+      </if>
+      <if test="contracturl != null" >
+        contracturl,
+      </if>
+      <if test="publicfileurl != null" >
+        publicfileurl,
+      </if>
+      <if test="statu != null" >
+        statu,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bussinessid != null" >
+        #{bussinessid,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="businessName != null" >
+        #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="ascompany != null" >
+        #{ascompany,jdbcType=VARCHAR},
+      </if>
+      <if test="contracturl != null" >
+        #{contracturl,jdbcType=VARCHAR},
+      </if>
+      <if test="publicfileurl != null" >
+        #{publicfileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="statu != null" >
+        #{statu,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.yanmai.model.example.BussinessExample" resultType="java.lang.Integer" >
+    select count(*) from t_business
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_business
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bussinessid != null" >
+        bussinessid = #{record.bussinessid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeid != null" >
+        typeid = #{record.typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyid != null" >
+        companyid = #{record.companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessName != null" >
+        business_name = #{record.businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ascompany != null" >
+        asCompany = #{record.ascompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contracturl != null" >
+        contracturl = #{record.contracturl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publicfileurl != null" >
+        publicfileurl = #{record.publicfileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statu != null" >
+        statu = #{record.statu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_business
+    set id = #{record.id,jdbcType=INTEGER},
+      bussinessid = #{record.bussinessid,jdbcType=VARCHAR},
+      typeid = #{record.typeid,jdbcType=VARCHAR},
+      companyid = #{record.companyid,jdbcType=VARCHAR},
+      business_name = #{record.businessName,jdbcType=VARCHAR},
+      asCompany = #{record.ascompany,jdbcType=VARCHAR},
+      contracturl = #{record.contracturl,jdbcType=VARCHAR},
+      publicfileurl = #{record.publicfileurl,jdbcType=VARCHAR},
+      statu = #{record.statu,jdbcType=VARCHAR},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.yanmai.model.Bussiness" >
+    update t_business
+    <set >
+      <if test="bussinessid != null" >
+        bussinessid = #{bussinessid,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null" >
+        typeid = #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        companyid = #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="businessName != null" >
+        business_name = #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="ascompany != null" >
+        asCompany = #{ascompany,jdbcType=VARCHAR},
+      </if>
+      <if test="contracturl != null" >
+        contracturl = #{contracturl,jdbcType=VARCHAR},
+      </if>
+      <if test="publicfileurl != null" >
+        publicfileurl = #{publicfileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="statu != null" >
+        statu = #{statu,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.yanmai.model.Bussiness" >
+    update t_business
+    set bussinessid = #{bussinessid,jdbcType=VARCHAR},
+      typeid = #{typeid,jdbcType=VARCHAR},
+      companyid = #{companyid,jdbcType=VARCHAR},
+      business_name = #{businessName,jdbcType=VARCHAR},
+      asCompany = #{ascompany,jdbcType=VARCHAR},
+      contracturl = #{contracturl,jdbcType=VARCHAR},
+      publicfileurl = #{publicfileurl,jdbcType=VARCHAR},
+      statu = #{statu,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

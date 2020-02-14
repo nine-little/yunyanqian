@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.yanmai.dao.PreloantaskMapper" >
+  <resultMap id="BaseResultMap" type="org.yanmai.model.Preloantask" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="company_userid" property="companyUserid" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="VARCHAR" />
+    <result column="task_id" property="taskId" jdbcType="VARCHAR" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="task_address" property="taskAddress" jdbcType="VARCHAR" />
+    <result column="business_id" property="businessId" jdbcType="VARCHAR" />
+    <result column="concatfileurl" property="concatfileurl" jdbcType="VARCHAR" />
+    <result column="accept_statu" property="acceptStatu" jdbcType="VARCHAR" />
+    <result column="createtasktime" property="createtasktime" jdbcType="TIMESTAMP" />
+    <result column="task_statu" property="taskStatu" jdbcType="VARCHAR" />
+    <result column="reviewstatu" property="reviewstatu" jdbcType="INTEGER" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, order_number, company_userid, company_id, task_id, task_name, task_address, business_id, 
+    concatfileurl, accept_statu, createtasktime, task_statu, reviewstatu, reason
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.yanmai.model.example.PreloantaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from preloantask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from preloantask
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from preloantask
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.yanmai.model.example.PreloantaskExample" >
+    delete from preloantask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.yanmai.model.Preloantask" >
+    insert into preloantask (id, order_number, company_userid, 
+      company_id, task_id, task_name, 
+      task_address, business_id, concatfileurl, 
+      accept_statu, createtasktime, task_statu, 
+      reviewstatu, reason)
+    values (#{id,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{companyUserid,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{taskName,jdbcType=VARCHAR}, 
+      #{taskAddress,jdbcType=VARCHAR}, #{businessId,jdbcType=VARCHAR}, #{concatfileurl,jdbcType=VARCHAR}, 
+      #{acceptStatu,jdbcType=VARCHAR}, #{createtasktime,jdbcType=TIMESTAMP}, #{taskStatu,jdbcType=VARCHAR}, 
+      #{reviewstatu,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.yanmai.model.Preloantask" >
+    insert into preloantask
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="companyUserid != null" >
+        company_userid,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="taskAddress != null" >
+        task_address,
+      </if>
+      <if test="businessId != null" >
+        business_id,
+      </if>
+      <if test="concatfileurl != null" >
+        concatfileurl,
+      </if>
+      <if test="acceptStatu != null" >
+        accept_statu,
+      </if>
+      <if test="createtasktime != null" >
+        createtasktime,
+      </if>
+      <if test="taskStatu != null" >
+        task_statu,
+      </if>
+      <if test="reviewstatu != null" >
+        reviewstatu,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="companyUserid != null" >
+        #{companyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskAddress != null" >
+        #{taskAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="businessId != null" >
+        #{businessId,jdbcType=VARCHAR},
+      </if>
+      <if test="concatfileurl != null" >
+        #{concatfileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptStatu != null" >
+        #{acceptStatu,jdbcType=VARCHAR},
+      </if>
+      <if test="createtasktime != null" >
+        #{createtasktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskStatu != null" >
+        #{taskStatu,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewstatu != null" >
+        #{reviewstatu,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.yanmai.model.example.PreloantaskExample" resultType="java.lang.Integer" >
+    select count(*) from preloantask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update preloantask
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderNumber != null" >
+        order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyUserid != null" >
+        company_userid = #{record.companyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null" >
+        company_id = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskId != null" >
+        task_id = #{record.taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskName != null" >
+        task_name = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskAddress != null" >
+        task_address = #{record.taskAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessId != null" >
+        business_id = #{record.businessId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.concatfileurl != null" >
+        concatfileurl = #{record.concatfileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acceptStatu != null" >
+        accept_statu = #{record.acceptStatu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtasktime != null" >
+        createtasktime = #{record.createtasktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.taskStatu != null" >
+        task_statu = #{record.taskStatu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewstatu != null" >
+        reviewstatu = #{record.reviewstatu,jdbcType=INTEGER},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update preloantask
+    set id = #{record.id,jdbcType=INTEGER},
+      order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      company_userid = #{record.companyUserid,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=VARCHAR},
+      task_id = #{record.taskId,jdbcType=VARCHAR},
+      task_name = #{record.taskName,jdbcType=VARCHAR},
+      task_address = #{record.taskAddress,jdbcType=VARCHAR},
+      business_id = #{record.businessId,jdbcType=VARCHAR},
+      concatfileurl = #{record.concatfileurl,jdbcType=VARCHAR},
+      accept_statu = #{record.acceptStatu,jdbcType=VARCHAR},
+      createtasktime = #{record.createtasktime,jdbcType=TIMESTAMP},
+      task_statu = #{record.taskStatu,jdbcType=VARCHAR},
+      reviewstatu = #{record.reviewstatu,jdbcType=INTEGER},
+      reason = #{record.reason,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.yanmai.model.Preloantask" >
+    update preloantask
+    <set >
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="companyUserid != null" >
+        company_userid = #{companyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskAddress != null" >
+        task_address = #{taskAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="businessId != null" >
+        business_id = #{businessId,jdbcType=VARCHAR},
+      </if>
+      <if test="concatfileurl != null" >
+        concatfileurl = #{concatfileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptStatu != null" >
+        accept_statu = #{acceptStatu,jdbcType=VARCHAR},
+      </if>
+      <if test="createtasktime != null" >
+        createtasktime = #{createtasktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskStatu != null" >
+        task_statu = #{taskStatu,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewstatu != null" >
+        reviewstatu = #{reviewstatu,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.yanmai.model.Preloantask" >
+    update preloantask
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      company_userid = #{companyUserid,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      task_id = #{taskId,jdbcType=VARCHAR},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      task_address = #{taskAddress,jdbcType=VARCHAR},
+      business_id = #{businessId,jdbcType=VARCHAR},
+      concatfileurl = #{concatfileurl,jdbcType=VARCHAR},
+      accept_statu = #{acceptStatu,jdbcType=VARCHAR},
+      createtasktime = #{createtasktime,jdbcType=TIMESTAMP},
+      task_statu = #{taskStatu,jdbcType=VARCHAR},
+      reviewstatu = #{reviewstatu,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

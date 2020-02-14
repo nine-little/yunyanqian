@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.yanmai.dao.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="org.yanmai.model.Permission" >
+    <id column="per_id" property="perId" jdbcType="INTEGER" />
+    <result column="oprt_type_id" property="oprtTypeId" jdbcType="DECIMAL" />
+    <result column="sup_per_id" property="supPerId" jdbcType="DECIMAL" />
+    <result column="per_level" property="perLevel" jdbcType="DECIMAL" />
+    <result column="per_code" property="perCode" jdbcType="VARCHAR" />
+    <result column="per_name" property="perName" jdbcType="VARCHAR" />
+    <result column="per_desc" property="perDesc" jdbcType="VARCHAR" />
+    <result column="per_order" property="perOrder" jdbcType="DECIMAL" />
+    <result column="per_url" property="perUrl" jdbcType="VARCHAR" />
+    <result column="data_state" property="dataState" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    per_id, oprt_type_id, sup_per_id, per_level, per_code, per_name, per_desc, per_order, 
+    per_url, data_state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.yanmai.model.example.PermissionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_permission
+    where per_id = #{perId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_permission
+    where per_id = #{perId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.yanmai.model.example.PermissionExample" >
+    delete from t_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.yanmai.model.Permission" >
+    insert into t_permission (per_id, oprt_type_id, sup_per_id, 
+      per_level, per_code, per_name, 
+      per_desc, per_order, per_url, 
+      data_state)
+    values (#{perId,jdbcType=INTEGER}, #{oprtTypeId,jdbcType=DECIMAL}, #{supPerId,jdbcType=DECIMAL}, 
+      #{perLevel,jdbcType=DECIMAL}, #{perCode,jdbcType=VARCHAR}, #{perName,jdbcType=VARCHAR}, 
+      #{perDesc,jdbcType=VARCHAR}, #{perOrder,jdbcType=DECIMAL}, #{perUrl,jdbcType=VARCHAR}, 
+      #{dataState,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="org.yanmai.model.Permission" >
+    insert into t_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="perId != null" >
+        per_id,
+      </if>
+      <if test="oprtTypeId != null" >
+        oprt_type_id,
+      </if>
+      <if test="supPerId != null" >
+        sup_per_id,
+      </if>
+      <if test="perLevel != null" >
+        per_level,
+      </if>
+      <if test="perCode != null" >
+        per_code,
+      </if>
+      <if test="perName != null" >
+        per_name,
+      </if>
+      <if test="perDesc != null" >
+        per_desc,
+      </if>
+      <if test="perOrder != null" >
+        per_order,
+      </if>
+      <if test="perUrl != null" >
+        per_url,
+      </if>
+      <if test="dataState != null" >
+        data_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="perId != null" >
+        #{perId,jdbcType=INTEGER},
+      </if>
+      <if test="oprtTypeId != null" >
+        #{oprtTypeId,jdbcType=DECIMAL},
+      </if>
+      <if test="supPerId != null" >
+        #{supPerId,jdbcType=DECIMAL},
+      </if>
+      <if test="perLevel != null" >
+        #{perLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="perCode != null" >
+        #{perCode,jdbcType=VARCHAR},
+      </if>
+      <if test="perName != null" >
+        #{perName,jdbcType=VARCHAR},
+      </if>
+      <if test="perDesc != null" >
+        #{perDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="perOrder != null" >
+        #{perOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="perUrl != null" >
+        #{perUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dataState != null" >
+        #{dataState,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.yanmai.model.example.PermissionExample" resultType="java.lang.Integer" >
+    select count(*) from t_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_permission
+    <set >
+      <if test="record.perId != null" >
+        per_id = #{record.perId,jdbcType=INTEGER},
+      </if>
+      <if test="record.oprtTypeId != null" >
+        oprt_type_id = #{record.oprtTypeId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.supPerId != null" >
+        sup_per_id = #{record.supPerId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.perLevel != null" >
+        per_level = #{record.perLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="record.perCode != null" >
+        per_code = #{record.perCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.perName != null" >
+        per_name = #{record.perName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.perDesc != null" >
+        per_desc = #{record.perDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.perOrder != null" >
+        per_order = #{record.perOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="record.perUrl != null" >
+        per_url = #{record.perUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataState != null" >
+        data_state = #{record.dataState,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_permission
+    set per_id = #{record.perId,jdbcType=INTEGER},
+      oprt_type_id = #{record.oprtTypeId,jdbcType=DECIMAL},
+      sup_per_id = #{record.supPerId,jdbcType=DECIMAL},
+      per_level = #{record.perLevel,jdbcType=DECIMAL},
+      per_code = #{record.perCode,jdbcType=VARCHAR},
+      per_name = #{record.perName,jdbcType=VARCHAR},
+      per_desc = #{record.perDesc,jdbcType=VARCHAR},
+      per_order = #{record.perOrder,jdbcType=DECIMAL},
+      per_url = #{record.perUrl,jdbcType=VARCHAR},
+      data_state = #{record.dataState,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.yanmai.model.Permission" >
+    update t_permission
+    <set >
+      <if test="oprtTypeId != null" >
+        oprt_type_id = #{oprtTypeId,jdbcType=DECIMAL},
+      </if>
+      <if test="supPerId != null" >
+        sup_per_id = #{supPerId,jdbcType=DECIMAL},
+      </if>
+      <if test="perLevel != null" >
+        per_level = #{perLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="perCode != null" >
+        per_code = #{perCode,jdbcType=VARCHAR},
+      </if>
+      <if test="perName != null" >
+        per_name = #{perName,jdbcType=VARCHAR},
+      </if>
+      <if test="perDesc != null" >
+        per_desc = #{perDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="perOrder != null" >
+        per_order = #{perOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="perUrl != null" >
+        per_url = #{perUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dataState != null" >
+        data_state = #{dataState,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where per_id = #{perId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.yanmai.model.Permission" >
+    update t_permission
+    set oprt_type_id = #{oprtTypeId,jdbcType=DECIMAL},
+      sup_per_id = #{supPerId,jdbcType=DECIMAL},
+      per_level = #{perLevel,jdbcType=DECIMAL},
+      per_code = #{perCode,jdbcType=VARCHAR},
+      per_name = #{perName,jdbcType=VARCHAR},
+      per_desc = #{perDesc,jdbcType=VARCHAR},
+      per_order = #{perOrder,jdbcType=DECIMAL},
+      per_url = #{perUrl,jdbcType=VARCHAR},
+      data_state = #{dataState,jdbcType=DECIMAL}
+    where per_id = #{perId,jdbcType=INTEGER}
+  </update>
+</mapper>

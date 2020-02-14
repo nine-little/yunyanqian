@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="config" />
+        <module name="contract" />
+        <module name="eurekaclient" />
+        <module name="eurekaserver" />
+        <module name="mechanism" />
+        <module name="task" />
+        <module name="user" />
+        <module name="utilcommon" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="config" target="1.8" />
+      <module name="contract" target="1.8" />
+      <module name="eurekaclient" target="1.8" />
+      <module name="eurekaserver" target="1.8" />
+      <module name="eurekaserver (1)" target="1.8" />
+      <module name="mechanism" target="1.8" />
+      <module name="springcloudtest" target="1.8" />
+      <module name="task" target="1.8" />
+      <module name="user" target="1.8" />
+      <module name="utilcommon" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

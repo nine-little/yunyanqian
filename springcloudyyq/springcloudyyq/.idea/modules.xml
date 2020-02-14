@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/config/config.iml" filepath="$PROJECT_DIR$/config/config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yunyan-contract/contract.iml" filepath="$PROJECT_DIR$/yunyan-contract/contract.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eurekaclient/eurekaclient.iml" filepath="$PROJECT_DIR$/eurekaclient/eurekaclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eurekaserver/eurekaserver.iml" filepath="$PROJECT_DIR$/eurekaserver/eurekaserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yunyan-mechanism/mechanism.iml" filepath="$PROJECT_DIR$/yunyan-mechanism/mechanism.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcloudtest.iml" filepath="$PROJECT_DIR$/springcloudtest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yunyan-task/task.iml" filepath="$PROJECT_DIR$/yunyan-task/task.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yunyan-user/user.iml" filepath="$PROJECT_DIR$/yunyan-user/user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/utilcommon/utilcommon.iml" filepath="$PROJECT_DIR$/utilcommon/utilcommon.iml" />
+    </modules>
+  </component>
+</project>
